@@ -11,10 +11,12 @@ git_repository(
 )
 
 http_archive(
-    name = "com_google_protobuf",
-    sha256 = "662879e41508a5ecce3be2c65563a8fac3301a48adef3113913ec4010f405a33",
-    strip_prefix = "protobuf-3.20.1",
-    urls = ["https://github.com/protocolbuffers/protobuf/archive/v3.20.1.zip"],
+    name = "rules_proto",
+    sha256 = "e017528fd1c91c5a33f15493e3a398181a9e821a804eb7ff5acdd1d2d6c2b18d",
+    strip_prefix = "rules_proto-4.0.0-3.20.0",
+    urls = [
+        "https://github.com/bazelbuild/rules_proto/archive/refs/tags/4.0.0-3.20.0.tar.gz",
+    ],
 )
 
 http_archive(
@@ -24,9 +26,10 @@ http_archive(
     urls = ["https://github.com/bazelbuild/bazel-skylib/archive/b113ed5d05ccddee3093bb157b9b02ab963c1c32.tar.gz"],
 )
 
-load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 
-protobuf_deps()
+rules_proto_dependencies()
+rules_proto_toolchains()
 
 
 load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
